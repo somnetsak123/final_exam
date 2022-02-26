@@ -6,6 +6,16 @@ import './style.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Register from "../register/Register";
 import Showdata from "../showdata/Showdata";
+import ButtonShowdataElectronic from "../showdata/ButtonElectronic";
+import ShowdataElectronic from "../showdata/ShowdataElectronic";
+import ButtonComputerEngineering from "../showdata/Button/home/thanaphon/dbms-fb/react/src/showdata/ButtonComputerEngineering.js";
+import ShowdataComputerEngineering from "../showdata/ShowdataComputerEngineering";
+import ButtonComputerScience from "../showdata/Button/home/thanaphon/dbms-fb/react/src/showdata/ButtonComputerScience";
+import ShowdataComputerScience from "../showdata/ShowdataComputerScience";
+import ButtonElectricalEngineeri from "../showdata/Button/home/thanaphon/dbms-fb/react/src/showdata/ButtonElectricalEngineeri";
+import ShowdataElectricalEngineeri from "../showdata/ShowdataElectricalEngineeri";
+import ButtonScience from "../showdata/Button/home/thanaphon/dbms-fb/react/src/showdata/ButtonScience";
+import ShowdataScience from "../showdata/ShowdataScience";
 
 export default class Facebook extends Component {
   state = {
@@ -63,10 +73,16 @@ export default class Facebook extends Component {
  	         email: {JSON.parse(localStorage.getItem('user')).email}
           <div className="my-3"><a className="btn btn-danger" href="/" onClick={this.logoutFacebook}>Logout</a></div>
           <BrowserRouter>
-            <br /><br /><div className="btn-group btn-group-lg"><ButtonRegister /><ButtonShowdata /></div>
+            <br /><br /><div className="btn-group btn-group-lg"><ButtonRegister /><ButtonShowdata /><ButtonShowdataElectronic/>
+            <ButtonComputerEngineering/><ButtonComputerScience/><ButtonElectricalEngineeri/><ButtonScience/></div>
             <Switch>
               <Route path='/register' component={Register} />
               <Route path='/showdata' component={Showdata} />
+              <Route path='/ShowdataElectronic' component={ShowdataElectronic} />
+              <Route path='/ShowdataComputerEngineering' component={ShowdataComputerEngineering} />
+              <Route path='/ShowdataComputerScience' component={ShowdataComputerScience} />
+              <Route path='/ShowdataElectricalEngineeri' component={ShowdataElectricalEngineeri} />
+              <Route path='/ShowdataScience' component={ShowdataScience} />
             </Switch>
           </BrowserRouter>
         </div>

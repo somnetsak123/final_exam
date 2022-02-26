@@ -5,7 +5,7 @@ import './Showdata.css';
 //import '../../server/app';
 import {ip,port} from "../setIP/setting";
 
-export default class ShowdataClassEL extends Component{
+export default class ShowdataElectronic extends Component{
     constructor() {
         super();
         this.state ={
@@ -15,12 +15,22 @@ export default class ShowdataClassEL extends Component{
             lastname:"",
             email:"",
             Class:"",
-            time:""
+            class_EN:"",
+            data1:[]
+            
         }
         this.handleChang = this.handleChang.bind(this);
         this.handleClicked = this.handleClicked.bind(this);
         //console.log("hello show data");
+
+   
+
     }
+
+
+    
+
+
     componentDidMount() {
         //console.log("before get data");
         this.getData();
@@ -28,11 +38,19 @@ export default class ShowdataClassEL extends Component{
     }
     getData = () => {
         console.log("before fetch data");
-        fetch('/data')
+        fetch('/EN')
             .then(res => res.json())
             .then(list => this.setState({ list }))
         console.log("after fetch data");
+
+        console.log("before fetch data");
+        fetch('/class_std')
+            .then(res => res.json())
+            .then(list => this.setState({ data1:list }))
+        console.log("after fetch data");
+
     }
+
 
     onDelete=(user)=>{
         let url = `https://localhost:3000/delete`;
@@ -62,25 +80,21 @@ export default class ShowdataClassEL extends Component{
             lastname:user.lastname_D,
             email:user.Email_D,
             Class:user.Class_D,
-            time:user.time_D
+            class_EN:user.Class_Name
+          
 
         })
+
     }
     handleChang = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         });
-        let url = `https://localhost:3000/data`;
-        let data = {
-            idkey:this.state.idkey,
-            firstname:this.state.firstname,
-            lastname:this.state.lastname,
-            email:this.state.email,
-            Class:this.state.Class,
-            time:this.state.time
+        
+   
         }
-        axios.put(url,data)
-    }
+      
+    
 
     handleClicked(){
         let url = `https://localhost:3000/data`;
@@ -90,7 +104,9 @@ export default class ShowdataClassEL extends Component{
             lastname_D:this.state.lastname,
             Email_D:this.state.email,
             Class_D:this.state.Class,
-            time_D:this.state.time
+            Class_Name:this.state.class_EN
+           
+            
         }
         axios.put(url,data)
         this.setState({
@@ -98,8 +114,8 @@ export default class ShowdataClassEL extends Component{
             firstname:"",
             lastname:"",
             email:"",
-            Class:"",
-            time:""
+            Class:""
+          
         });
 	this.closeModal();
         setTimeout(()=>{this.componentDidMount()},1)
@@ -109,32 +125,31 @@ export default class ShowdataClassEL extends Component{
 
         return (
             <div className="App">
-                <h2 className="my-4">Users Information ShowdataClassEL<br/></h2>
+                <h2 className="my-4">Users Information Electronic<br/></h2>
                 <hr/>
                 <div className="container p-3 my-3 bg-dark text-white">
                     <table className="table table-dark">
                         <thead>
                             <tr>
                             <th>ID</th>
+                            <th>Class Name</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Class</th>
-                            <th>Time</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
                                 {list.map((user) =>{
                                     return(
                                         <tr>
-                                            <td>{user.id_D}</td>
+                                            <td>{user.ID_E}</td>
+                                            <td>{user.Class_electronic}</td>
                                             <td>{user.firstname_D}</td>
                                             <td>{user.lastname_D}</td>
                                             <td>{user.Email_D}</td>
-                                            <td>{user.Class_D}</td>
-                                            <td>{user.time_D}</td>
-                                            <td><button type="button" class="btn btn-warning" onClick={()=>this.call(user)}>Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"  onClick={()=>this.onDelete(user)}>Delet</button></td>
+                                            {/* <td><button type="button" class="btn btn-warning" onClick={()=>this.call(user)}>Edit</button></td> */}
+                                            {/* <td><button type="button" class="btn btn-danger"  onClick={()=>this.onDelete(user)}>Delet</button></td> */}
                                             <div className="box">
                                                 <Modal visible={this.state.visible}
                                                        width="1200"
@@ -160,7 +175,14 @@ export default class ShowdataClassEL extends Component{
                                                         </div> */}
                                                         <div className="form-group">
                                                             <label>class:</label>
-                                                            <input type="text" className="form-control" id="class_1" onChange={this.handleChang} value={this.state.Class}/>
+                                                            {/* <input type="text" className="form-control" id="class_1" onChange={this.handleChang} value={this.state.Class}/> */}
+                                                            <select className="form-group" id="Class" value={this.state.Class} onChange={this.handleChang} required>
+                                                                    <option value="">Select Class</option>
+                                                                      {this.state.data1.map(item => {
+                                                                       return <option value={item.ID}>{item.Class_Name}</option>
+                                                                                })}
+                                                             </select>
+                                                        
                                                         </div>
                                                         {/* <div className="form-group">
                                                             <label>Time:</label>

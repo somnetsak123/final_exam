@@ -5,7 +5,7 @@ import './Showdata.css';
 //import '../../server/app';
 import {ip,port} from "../setIP/setting";
 
-export default class Showdata extends Component{
+export default class ShowdataComputerScience extends Component{
     constructor() {
         super();
         this.state ={
@@ -15,7 +15,7 @@ export default class Showdata extends Component{
             lastname:"",
             email:"",
             Class:"",
-            time:"",
+            class_EN:"",
             data1:[]
             
         }
@@ -38,7 +38,7 @@ export default class Showdata extends Component{
     }
     getData = () => {
         console.log("before fetch data");
-        fetch('/data')
+        fetch('/CS')
             .then(res => res.json())
             .then(list => this.setState({ list }))
         console.log("after fetch data");
@@ -80,7 +80,8 @@ export default class Showdata extends Component{
             lastname:user.lastname_D,
             email:user.Email_D,
             Class:user.Class_D,
-            time:user.time_D
+            class_EN:user.Class_Name
+          
 
         })
 
@@ -103,7 +104,8 @@ export default class Showdata extends Component{
             lastname_D:this.state.lastname,
             Email_D:this.state.email,
             Class_D:this.state.Class,
-            time_D:this.state.time
+            Class_Name:this.state.class_EN
+           
             
         }
         axios.put(url,data)
@@ -112,8 +114,8 @@ export default class Showdata extends Component{
             firstname:"",
             lastname:"",
             email:"",
-            Class:"",
-            time:""
+            Class:""
+          
         });
 	this.closeModal();
         setTimeout(()=>{this.componentDidMount()},1)
@@ -123,32 +125,31 @@ export default class Showdata extends Component{
 
         return (
             <div className="App">
-                <h2 className="my-4">Users Information<br/></h2>
+                <h2 className="my-4">Users Information ComputerScience<br/></h2>
                 <hr/>
                 <div className="container p-3 my-3 bg-dark text-white">
                     <table className="table table-dark">
                         <thead>
                             <tr>
                             <th>ID</th>
+                            <th>Class Name</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Class Name</th>
-                            <th>Time</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
                                 {list.map((user) =>{
                                     return(
                                         <tr>
-                                            <td>{user.id_D}</td>
+                                            <td>{user.ID_CS }</td>
+                                            <td>{user.class_computerscience}</td>
                                             <td>{user.firstname_D}</td>
                                             <td>{user.lastname_D}</td>
                                             <td>{user.Email_D}</td>
-                                            <td>{user.Class_Name}</td>
-                                            <td>{user.time_D}</td>
-                                            <td><button type="button" class="btn btn-warning" onClick={()=>this.call(user)}>Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"  onClick={()=>this.onDelete(user)}>Delet</button></td>
+                                            {/* <td><button type="button" class="btn btn-warning" onClick={()=>this.call(user)}>Edit</button></td> */}
+                                            {/* <td><button type="button" class="btn btn-danger"  onClick={()=>this.onDelete(user)}>Delet</button></td> */}
                                             <div className="box">
                                                 <Modal visible={this.state.visible}
                                                        width="1200"

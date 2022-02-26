@@ -35,6 +35,61 @@ app.get('/data', function(req,res){
     console.log("after query");
 });
 
+app.get('/EN', function(req,res){
+    console.log("Hello in /data ");
+    let sql = 'SELECT e.*, r.firstname_D, r.lastname_D ,r.Email_D FROM electronic e , regi r WHERE r.Class_D = 1;';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
+app.get('/CE', function(req,res){
+    console.log("Hello in /data ");
+    let sql = 'SELECT c.* , r.firstname_D, r.lastname_D,r.Email_D FROM computerengineering c , regi r WHERE r.Class_D = 2;';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
+app.get('/CS', function(req,res){
+    console.log("Hello in /data ");
+    let sql = 'SELECT c.* , r.firstname_D, r.lastname_D,r.Email_D FROM computerscience c , regi r WHERE r.Class_D = 3;';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
+app.get('/EE', function(req,res){
+    console.log("Hello in /data ");
+    let sql = 'SELECT c.* , r.firstname_D, r.lastname_D,r.Email_D FROM electricalengineeri c , regi r WHERE r.Class_D = 4;';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
+app.get('/SS', function(req,res){
+    console.log("Hello in /data ");
+    let sql = 'SELECT c.* , r.firstname_D, r.lastname_D,r.Email_D FROM science c , regi r WHERE r.Class_D = 5;';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
 app.get('/class_std', function(req,res){
     console.log("Hello in /data ");
     let sql = 'SELECT * FROM class_std;';
@@ -57,8 +112,8 @@ app.put('/delete', function(req, res) {
 
 //edit
 app.put('/data', function(req, res) {
-    var sql = 'UPDATE regi SET firstname_D= ? , lastname_D = ? WHERE id_D = ?';
-    db.query(sql,[req.body.firstname_D,req.body.lastname_D,req.body.idkey],function (error, results) {
+    var sql = 'UPDATE regi SET firstname_D= ? , lastname_D = ? , Class_D = ? WHERE id_D = ?';
+    db.query(sql,[req.body.firstname_D,req.body.lastname_D,req.body.Class_D,req.body.idkey],function (error, results) {
         if(error) throw error;
         res.send(JSON.stringify(results));
     });
