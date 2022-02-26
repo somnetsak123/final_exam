@@ -26,7 +26,18 @@ const db = mysql.createConnection({
 // show data
 app.get('/data', function(req,res){
     console.log("Hello in /data ");
-    let sql = 'SELECT * FROM regi;';
+    let sql = 'SELECT r.*,c.Class_Name FROM regi r, class_std c WHERE r.Class_D = c.ID;';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
+app.get('/class_std', function(req,res){
+    console.log("Hello in /data ");
+    let sql = 'SELECT * FROM class_std;';
     db.query(sql, (err, result)=>{
         if(err) throw err;
         console.log(result);

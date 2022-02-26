@@ -10,15 +10,33 @@ export default class Register extends Component{
             firstname:"",
             lastname:"",
             email:"",
-            Class:""
+            Class:"",
+            data:[]
         }
         this.handleChang = this.handleChang.bind(this);
         this.handleClicked = this.handleClicked.bind(this);
     }
+
+    componentDidMount() {
+        //console.log("before get data");
+        this.getData();
+        //console.log("after get data");
+    }
+    getData = () => {
+        console.log("before fetch data");
+        fetch('/class_std')
+            .then(res => res.json())
+            .then(list => this.setState({ data:list }))
+        console.log("after fetch data");
+    }
+
+
     handleChang = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         });
+        console.log(e.target.id);
+        console.log(e.target.value);
     }
     handleClicked(){
         let url = `https://localhost:3000/data`;
@@ -38,6 +56,8 @@ export default class Register extends Component{
             Class:""
         });
     }
+
+    
 
     render() {
         return(
@@ -63,8 +83,14 @@ export default class Register extends Component{
                             
                     </div>
                     <div className="form-group">
-                    <label className="text-white"  >Class EL ro CT</label>
-                    <input type="text" className="form-control"  id="Class"  onChange={this.handleChang}  value={this.state.Class}/>
+                    <label className="text-white"  >Class </label>
+                    <br></br>
+                    <select className="form-group" id="Class" value={this.state.Class} onChange={this.handleChang} required>
+                            <option value="">Select Class</option>
+                                {this.state.data.map(item => {
+                                    return <option value={item.ID}>{item.Class_Name}</option>
+                                })}
+                        </select>
                     </div>
                     <div className="form-group">
                         <label className="text-white"  htmlFor="id">Id</label>

@@ -5,7 +5,7 @@ import './Showdata.css';
 //import '../../server/app';
 import {ip,port} from "../setIP/setting";
 
-export default class Showdata extends Component{
+export default class ShowdataClassCT extends Component{
     constructor() {
         super();
         this.state ={
@@ -91,7 +91,6 @@ export default class Showdata extends Component{
             Email_D:this.state.email,
             Class_D:this.state.Class,
             time_D:this.state.time
-            
         }
         axios.put(url,data)
         this.setState({
@@ -110,7 +109,7 @@ export default class Showdata extends Component{
 
         return (
             <div className="App">
-                <h2 className="my-4">Users Information<br/></h2>
+                <h2 className="my-4">Users Information ShowdataClassCT<br/></h2>
                 <hr/>
                 <div className="container p-3 my-3 bg-dark text-white">
                     <table className="table table-dark">
@@ -120,7 +119,7 @@ export default class Showdata extends Component{
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Class Name</th>
+                            <th>Class</th>
                             <th>Time</th>
                             </tr>
                         </thead>
@@ -132,7 +131,7 @@ export default class Showdata extends Component{
                                             <td>{user.firstname_D}</td>
                                             <td>{user.lastname_D}</td>
                                             <td>{user.Email_D}</td>
-                                            <td>{user.Class_Name}</td>
+                                            <td>{user.Class_D}</td>
                                             <td>{user.time_D}</td>
                                             <td><button type="button" class="btn btn-warning" onClick={()=>this.call(user)}>Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"  onClick={()=>this.onDelete(user)}>Delet</button></td>
@@ -159,10 +158,10 @@ export default class Showdata extends Component{
                                                             <label>Email:</label>
                                                             <input type="text" className="form-control" id="email" onChange={this.handleChang} value={this.state.email}/>
                                                         </div> */}
-                                                        {/* <div className="form-group">
+                                                        <div className="form-group">
                                                             <label>class:</label>
                                                             <input type="text" className="form-control" id="class_1" onChange={this.handleChang} value={this.state.Class}/>
-                                                        </div> */}
+                                                        </div>
                                                         {/* <div className="form-group">
                                                             <label>Time:</label>
                                                             <input type="text" className="form-control" id="time" onChange={this.handleChang} value={this.state.time}/>
